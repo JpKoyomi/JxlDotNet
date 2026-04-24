@@ -1,0 +1,31 @@
+<Project>
+  <Import Project="LibJxlNative.props" />
+
+  <ItemGroup>
+    <LibJxlNativeDllName Include="jxl.dll" />
+    <LibJxlNativeDllName Include="jxl_threads.dll" />
+    <LibJxlNativeDllName Include="jxl_cms.dll" />
+    <LibJxlNativeDllName Include="brotlicommon.dll" />
+    <LibJxlNativeDllName Include="brotlidec.dll" />
+    <LibJxlNativeDllName Include="brotlienc.dll" />
+    <LibJxlStagedDll Include="@(LibJxlNativeDllName->'$(LibJxlStageDir)\%(Identity)')" />
+  </ItemGroup>
+
+  <Target Name="BuildLibJxl"
+          Inputs="$(LibJxlSourceDir)\CMakeLists.txt;$(LibJxlBuildScript)"
+          Outputs="@(LibJxlStagedDll)"
+          BeforeTargets="BeforeBuild;Build">
+    <Message Importance="high" Text="[JxlDotNet] Building libjxl ($(LibJxlNativeConfiguration), $(LibJxlRid))" />
+    <Exec Command="pwsh -NoProfile -ExecutionPolicy Bypass -File &quot;$(LibJxlBuildScript)&quot; -SourceDir &quot;$(LibJxlSourceDir)&quot; -BuildDir &quot;$(LibJxlBuildDir)&quot; -StageDir &quot;$(LibJxlStageDir)&quot; -Configuration $(LibJxlNativeConfiguration)"
+          WorkingDirectory="$(LibJxlRepoRoot)" />
+  </Target>
+
+  <ItemGroup>
+    <None Include="@(LibJxlStagedDll)"
+          Link="%(Filename)%(Extension)"
+          Pack="true"
+          PackagePath="runtimes/$(LibJxlRid)/native/"
+          CopyToOutputDirectory="PreserveNewest"
+          Visible="false" />
+  </ItemGroup>
+</Project>

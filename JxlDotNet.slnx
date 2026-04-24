@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/JxlDotNet/JxlDotNet.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/JxlDotNet.Tests/JxlDotNet.Tests.csproj" />
+  </Folder>
+</Solution>

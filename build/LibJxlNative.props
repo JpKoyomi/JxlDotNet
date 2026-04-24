@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <LibJxlRepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\'))</LibJxlRepoRoot>
+    <LibJxlSourceDir>$(LibJxlRepoRoot)thirdparty\libjxl</LibJxlSourceDir>
+    <LibJxlNativeConfiguration Condition=" '$(LibJxlNativeConfiguration)' == '' ">Release</LibJxlNativeConfiguration>
+    <LibJxlRid Condition=" '$(LibJxlRid)' == '' ">win-x64</LibJxlRid>
+    <LibJxlBuildDir>$(LibJxlRepoRoot)artifacts\native\$(LibJxlRid)\$(LibJxlNativeConfiguration)</LibJxlBuildDir>
+    <LibJxlStageDir>$(MSBuildProjectDirectory)\runtimes\$(LibJxlRid)\native</LibJxlStageDir>
+    <LibJxlBuildScript>$(MSBuildThisFileDirectory)build-native.ps1</LibJxlBuildScript>
+  </PropertyGroup>
+</Project>

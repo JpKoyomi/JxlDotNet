@@ -52,3 +52,7 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# JxlDotNet — native build outputs
+/artifacts/
+src/JxlDotNet/runtimes/
